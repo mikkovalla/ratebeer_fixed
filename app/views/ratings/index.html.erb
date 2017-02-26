@@ -1,0 +1,31 @@
+<h2>Rating statistics</h2>
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>Top beers</h3>
+
+		<%= render 'top3list', objects: @best_beers %>
+	</div>
+
+	<div class="col-md-4">
+		<h3>Top breweries</h3>
+
+		<%= render 'top3list', objects: @best_breweries %>
+	</div>
+
+	<div class="col-md-4">
+		<h3>Top styles</h3>
+
+		<%= render 'top3list', objects: @best_styles %>
+	</div>
+</div>
+
+<h3>Recent ratings</h3>
+<%= render 'recentlist', ratings: @recent %>
+
+<h3>Most active users</h3>
+
+<%= render 'activeusers', users: @users%>
+
+<br>
+<%= link_to "New rating", new_rating_path, :class => "btn btn-primary" %>

@@ -1,0 +1,44 @@
+wadror@wadror:~/projekti/wadror2017$ rails c
+Loading development environment (Rails 4.2.4)
+[1] pry(main)> Brewery.create name:"BrewDog", year:2007
+   (0.0ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2017-01-23 12:47:49.891309"], ["updated_at", "2017-01-23 12:47:49.891309"]]
+   (5.5ms)  commit transaction
+=> #<Brewery:0x007ffb7a67fe80
+ id: 4,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Mon, 23 Jan 2017 12:47:49 UTC +00:00,
+ updated_at: Mon, 23 Jan 2017 12:47:49 UTC +00:00>
+[2] pry(main)> Beer.last
+  Beer Load (0.1ms)  SELECT  "beers".* FROM "beers"  ORDER BY "beers"."id" DESC LIMIT 1
+=> #<Beer:0x007ffb7a3e0da0
+ id: 10,
+ name: "Extra Light Triple Brewed",
+ style: "Lager",
+ brewery_id: 1,
+ created_at: Mon, 16 Jan 2017 11:23:34 UTC +00:00,
+ updated_at: Mon, 16 Jan 2017 11:23:34 UTC +00:00>
+[3] pry(main)> Beer.create name:"Punk IPA", style:"IPA", brewery_id:4
+   (0.2ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 4], ["created_at", "2017-01-23 12:48:22.652314"], ["updated_at", "2017-01-23 12:48:22.652314"]]
+   (9.5ms)  commit transaction
+=> #<Beer:0x007ffb7a2cc978
+ id: 11,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 4,
+ created_at: Mon, 23 Jan 2017 12:48:22 UTC +00:00,
+ updated_at: Mon, 23 Jan 2017 12:48:22 UTC +00:00>
+[4] pry(main)> Beer.create name:"Nanny State", style:"lowalcohol", brewery_id:4
+   (0.2ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 4], ["created_at", "2017-01-23 12:48:42.230368"], ["updated_at", "2017-01-23 12:48:42.230368"]]
+   (8.5ms)  commit transaction
+=> #<Beer:0x007ffb7a205a30
+ id: 12,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 4,
+ created_at: Mon, 23 Jan 2017 12:48:42 UTC +00:00,
+ updated_at: Mon, 23 Jan 2017 12:48:42 UTC +00:00>
+[5] pry(main)>

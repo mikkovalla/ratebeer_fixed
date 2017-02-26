@@ -1,0 +1,46 @@
+<p>
+  <h1><%= @beer_club.name %> <%= @beer_club.city %></h1>
+  
+</p>
+
+<p>
+  Founded <%= @beer_club.founded %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @beer_club.city %>
+</p>
+
+<% if @beer_club.members.empty? %>
+	<p>No members.</p>
+<% else %>
+	<h4>Members</h4>
+	<p>
+		<ul>
+			<% @beer_club.members.each do |member| %>
+				<li>
+					<%= link_to member.username, member %>
+				</li>
+			<% end %>
+		</ul>
+	</p>
+<% end %>
+
+<% if current_user and not @beer_club.members.include? current_user %>	
+
+	<%= form_for(@membership) do |f| %>
+    	<%= f.hidden_field :beer_club_id %>
+    	<%= f.submit class:"btn btn-primary", value:"join the club" %>
+	<% end %>
+<% end %>
+
+
+<% if current_user and @beer_club.members.include? current_user %>
+	<%= form_for(@membership, method: "delete") do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit class:"btn btn-danger", value: "end the membership" %>
+   <% end %>
+<% end %>
+<br>
+<%= edit_and_destroy_buttons(@beer_club) %>
