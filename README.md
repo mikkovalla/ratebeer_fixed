@@ -1,6 +1,6 @@
 ### Wepa RoR 2017 kurssityö
 ---
-Heroku ->
+Heroku -> [![Täällä](https://thawing-atoll-22269.herokuapp.com/)
 
 Travis -> [![Build Status](https://travis-ci.org/mikkovalla/ratebeer_fixed.svg?branch=master)](https://travis-ci.org/mikkovalla/ratebeer_fixed)
 
