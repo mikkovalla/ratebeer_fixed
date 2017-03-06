@@ -39,6 +39,10 @@ gem 'bootstrap-sass'
 
 gem 'jquery-turbolinks'
 
+gem 'selenium-webdriver', '2.53.4'
+
+gem 'database_cleaner'
+
 
 
 
