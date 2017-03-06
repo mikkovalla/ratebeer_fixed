@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'places', to: 'places#index'
     get 'beerlist', to: 'beers#list'
     get 'brewerylist', to: 'breweries#list'
+    get 'auth/:provider/callback', to: 'sessions#create_oauth'
 
     delete 'signout', to: 'sessions#destroy'
 

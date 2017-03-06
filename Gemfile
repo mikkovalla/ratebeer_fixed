@@ -45,6 +45,10 @@ gem 'database_cleaner'
 
 gem 'rack-mini-profiler'
 
+gem 'sucker_punch', '~> 2.0'
+
+gem 'omniauth-github'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
