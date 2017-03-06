@@ -1,46 +1,58 @@
 <p>
-  <h1><%= @beer_club.name %> <%= @beer_club.city %></h1>
-  
+    <h1><%= @beer_club.name %>
+        <%= @beer_club.city %></h1>
+
 </p>
 
 <p>
-  Founded <%= @beer_club.founded %>
+    Founded
+    <%= @beer_club.founded %>
 </p>
 
 <p>
-  <strong>City:</strong>
-  <%= @beer_club.city %>
+    <strong>City:</strong>
+    <%= @beer_club.city %>
 </p>
 
-<% if @beer_club.members.empty? %>
-	<p>No members.</p>
+<% if @confirmed_memberships.any? %>
+<h4>Members</h4>
+<p>
+    <ul>
+        <% @confirmed_memberships.each do |member| %>
+        <li><%= link_to member.user.username, member.user %></li>
+        <% end %>
+    </ul>
+</p>
 <% else %>
-	<h4>Members</h4>
-	<p>
-		<ul>
-			<% @beer_club.members.each do |member| %>
-				<li>
-					<%= link_to member.username, member %>
-				</li>
-			<% end %>
-		</ul>
-	</p>
+No members
 <% end %>
 
-<% if current_user and not @beer_club.members.include? current_user %>	
-
-	<%= form_for(@membership) do |f| %>
-    	<%= f.hidden_field :beer_club_id %>
-    	<%= f.submit class:"btn btn-primary", value:"join the club" %>
-	<% end %>
+<% if @unconfirmed_memberships.any? and current_user and current_user.memberships.confirmed.find_by(beer_club: @beer_club.id) %>
+<h4>New applications</h4>
+<p>
+    <ul>
+        <% @unconfirmed_memberships.each do |member| %>
+        <li><%= link_to member.user.username, member %>
+            <%= link_to "confirm", accept_membership_membership_path(member.id), method: :post, class: "btn btn-primary" %>
+        </li>
+        <% end %>
+    </ul>
+</p>
 <% end %>
 
+<% if current_user and not @beer_club.members.include? current_user %>
+
+<%= form_for(@membership) do |f| %>
+<%= f.hidden_field :beer_club_id %>
+<%= f.submit class:"btn btn-primary", value:"join the club" %>
+<% end %>
+<% end %>
 
 <% if current_user and @beer_club.members.include? current_user %>
-	<%= form_for(@membership, method: "delete") do |f| %>
-      <%= f.hidden_field :beer_club_id %>
-      <%= f.submit class:"btn btn-danger", value: "end the membership" %>
-   <% end %>
+<%= form_for(@membership, method: "delete") do |f| %>
+<%= f.hidden_field :beer_club_id %>
+<%= f.submit class:"btn btn-danger", value: "end the membership" %>
+<% end %>
 <% end %>
 <br>
 <%= edit_and_destroy_buttons(@beer_club) %>
