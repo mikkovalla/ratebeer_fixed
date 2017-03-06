@@ -1,7 +1,7 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :only_admins, only: [:destroy]
 
   # GET /beers
@@ -23,6 +23,10 @@ class BeersController < ApplicationController
       session[:last_order] = order
     end
   end
+
+  def list
+  end
+  
   # GET /beers/1
   # GET /beers/1.json
   def show

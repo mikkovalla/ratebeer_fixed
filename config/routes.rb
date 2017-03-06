@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :styles
   resources :beer_clubs
-  resources :memberships  
-  resources :beers  
+  resources :memberships
+  resources :beers
   resource :session, only: [:new, :create, :destroy]
   resources :ratings, only: [:index, :new, :create, :destroy]
   resources :places, only: [:index, :show]
@@ -15,13 +15,15 @@ Rails.application.routes.draw do
 
   root 'breweries#index'
 
-  get 'kaikki_bisset', to: 'beers#index'  
+  get 'kaikki_bisset', to: 'beers#index'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   get 'places', to: 'places#index'
+  get 'beerlist', to: 'beers#list'
+  get 'brewerylist', to: 'breweries#list'
 
   delete 'signout', to: 'sessions#destroy'
 
   post 'places', to:'places#search'
- 
+
 end
