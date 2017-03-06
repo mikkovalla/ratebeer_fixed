@@ -8,9 +8,21 @@ class BeersController < ApplicationController
   # GET /beers.json
   def index
     @beers = Beer.all
-    @styles = Style.all
-  end
 
+    order = params[:order] || 'name'
+
+    @beers = case order
+      when 'name' then @beers.sort_by{ |b| b.name }
+      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+      when 'style' then @beers.sort_by{ |b| b.style.name }
+    end
+
+    if order == session[:last_order]
+      @beers.reverse!
+    else
+      session[:last_order] = order
+    end
+  end
   # GET /beers/1
   # GET /beers/1.json
   def show
@@ -21,11 +33,11 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
-    @styles = Style.all    
+    @styles = Style.all
   end
 
   # GET /beers/1/edit
-  def edit    
+  def edit
   end
 
   # POST /beers
@@ -37,7 +49,7 @@ class BeersController < ApplicationController
       if @beer.save
         format.html { redirect_to @beer, notice: 'Beer was successfully created.' }
         format.json { render :show, status: :created, location: @beer }
-      else        
+      else
         format.html { render :new }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
